@@ -1,0 +1,65 @@
+.photo {
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  // height: 100px;
+  margin-top: 10px;
+  &__img {
+    aspect-ratio: 1;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.175);
+    box-sizing: content-box;
+    cursor: pointer;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.2s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+    &.vertical {
+      height: 100%;
+      width: auto;
+    }
+    &.horizontal {
+      width: 100;
+      height: auto;
+    }
+  }
+  &__content {
+    padding: 16px;
+    &__title {
+      color: #616161;
+      font-size: 20px;
+      margin: 0 0 8px;
+      font-weight: bold;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &__description {
+      color: #727272;
+      font-size: 16px;
+      margin: 0 0 8px;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  @media (min-width: 740px) {
+    margin-top: 16px;
+  }
+  @media (min-width: 1113px) {
+    margin-top: 24px;
+  }
+}
