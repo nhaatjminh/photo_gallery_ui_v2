@@ -7,6 +7,7 @@ export interface IPhoto {
   description: string
   image: string
   thumbnail: string
+  index?: number
 }
 
 const Photo: React.FC<IPhoto & { onClick: (photo: IPhoto) => void }> = ({
@@ -15,6 +16,7 @@ const Photo: React.FC<IPhoto & { onClick: (photo: IPhoto) => void }> = ({
   description,
   image,
   thumbnail,
+  index,
   onClick
 }) => {
   return (
@@ -25,7 +27,7 @@ const Photo: React.FC<IPhoto & { onClick: (photo: IPhoto) => void }> = ({
             src={thumbnail}
             onClick={(e) => {
               e.stopPropagation()
-              onClick({ _id, name, description, image, thumbnail })
+              onClick({ _id, name, description, image, thumbnail, index })
             }}
           />
         </div>

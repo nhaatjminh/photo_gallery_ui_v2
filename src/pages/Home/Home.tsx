@@ -28,6 +28,7 @@ export default function Home() {
         setHasMore(false)
       }
     }
+    return data.result
   }
 
   useEffect(() => {
@@ -62,15 +63,16 @@ export default function Home() {
     return () => {
       if (observer) observer.disconnect()
     }
-  }, [photos])
+  }, [photos, showPhoto])
 
   const ListPhoto = () => {
-    return photos.map((photo) => (
+    return photos.map((photo, index) => (
       <Photo
         onClick={(photo) => {
           setCurrentPhoto(photo)
           setIsShowPhoto(true)
         }}
+        index={index}
         key={photo._id}
         _id={photo._id}
         name={photo.name}
@@ -79,6 +81,24 @@ export default function Home() {
         thumbnail={photo.thumbnail}
       />
     ))
+  }
+
+  const handleOnClickNext = async (index: number) => {
+    if (index == photos.length - 1) {
+      if (hasMore) {
+        const res: IPhoto[] = await fetchMoreData()
+        if (res.length) {
+          setCurrentPhoto({ ...res[0], index: index + 1 })
+          return
+        }
+      } else return
+    }
+    setCurrentPhoto({ ...photos[index + 1], index: index + 1 })
+  }
+
+  const handleOnClickPrev = (index: number) => {
+    if (index == 0) return
+    setCurrentPhoto({ ...photos[index - 1], index: index - 1 })
   }
 
   return (
@@ -98,12 +118,15 @@ export default function Home() {
       {showPhoto && currentPhoto !== null ? (
         <ModalPhoto
           isShow={true}
+          index={currentPhoto.index}
           setIsShow={setIsShowPhoto}
           _id={currentPhoto._id}
           name={currentPhoto.name}
           description={currentPhoto.description}
           thumbnail={currentPhoto.thumbnail}
           image={currentPhoto.image}
+          onClickNext={handleOnClickNext}
+          onClickPrev={handleOnClickPrev}
         />
       ) : null}
     </>
