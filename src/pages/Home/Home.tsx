@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Photo from '~/components/Photo/Photo'
+import Photo, { IPhoto } from '~/components/Photo/Photo'
 import photosAPI from '~/services/api/PhotoApi'
 import './Home.scss'
+import ModalPhoto from '~/components/common/ModalPhoto/ModalPhoto'
 
 const limit = 12
 
@@ -12,7 +13,9 @@ const optionsObserver = {
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null)
-  const [photos, setPhotos] = useState<Photo[]>([])
+  const [photos, setPhotos] = useState<IPhoto[]>([])
+  const [currentPhoto, setCurrentPhoto] = useState<IPhoto | null>(null)
+  const [showPhoto, setIsShowPhoto] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(0)
 
@@ -64,6 +67,10 @@ export default function Home() {
   const ListPhoto = () => {
     return photos.map((photo) => (
       <Photo
+        onClick={(photo) => {
+          setCurrentPhoto(photo)
+          setIsShowPhoto(true)
+        }}
         key={photo._id}
         _id={photo._id}
         name={photo.name}
@@ -75,16 +82,30 @@ export default function Home() {
   }
 
   return (
-    <div className='home p-5'>
-      <h2 className='text-red-500 text-center mb-5'>Photo Gallery</h2>
-      <div ref={ref} className='home grid wide container'>
-        <div className='row'>
-          <ListPhoto />
-        </div>
-        <div id='loadmore' className=''>
-          ...Loadmore
+    <>
+      <div className='home p-5'>
+        <h2 className='text-red-500 text-center mb-5'>Photo Gallery</h2>
+        <div ref={ref} className='home grid wide container'>
+          <div className='row'>
+            <ListPhoto />
+          </div>
+          <div id='loadmore' className=''>
+            ...Loadmore
+          </div>
         </div>
       </div>
-    </div>
+
+      {showPhoto && currentPhoto !== null ? (
+        <ModalPhoto
+          isShow={true}
+          setIsShow={setIsShowPhoto}
+          _id={currentPhoto._id}
+          name={currentPhoto.name}
+          description={currentPhoto.description}
+          thumbnail={currentPhoto.thumbnail}
+          image={currentPhoto.image}
+        />
+      ) : null}
+    </>
   )
 }

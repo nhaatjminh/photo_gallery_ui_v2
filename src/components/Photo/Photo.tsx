@@ -1,7 +1,7 @@
 import React from 'react'
 import './Photo.scss'
 
-interface Photo {
+export interface IPhoto {
   _id: string
   name: string
   description: string
@@ -9,12 +9,25 @@ interface Photo {
   thumbnail: string
 }
 
-const Photo: React.FC<Photo> = ({ _id, name, description, image, thumbnail }) => {
+const Photo: React.FC<IPhoto & { onClick: (photo: IPhoto) => void }> = ({
+  _id,
+  name,
+  description,
+  image,
+  thumbnail,
+  onClick
+}) => {
   return (
     <div id={`p-${_id}`} className='col l-3 m-4 c-6'>
       <div className='photo'>
         <div className='photo__img'>
-          <img src={thumbnail} />
+          <img
+            src={thumbnail}
+            onClick={(e) => {
+              e.stopPropagation()
+              onClick({ _id, name, description, image, thumbnail })
+            }}
+          />
         </div>
         <div className='photo__content'>
           <p className='photo__content__title'>{name}</p>
