@@ -103,5 +103,29 @@
         margin: 8px 0;
       }
     }
+
+    &__form {
+      max-width: 800px;
+      margin: auto;
+      @media (max-width: 739px) {
+        margin-top: -12px;
+        padding-top: 20px;
+      }
+      textarea {
+        height: calc(100vh - 300px);
+        @media (max-width: 739px) {
+          height: calc(100vh - 250px);
+        }
+      }
+      .group-btn {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        .cancel-btn {
+          background-color: #535353;
+        }
+      }
+    }
   }
 }

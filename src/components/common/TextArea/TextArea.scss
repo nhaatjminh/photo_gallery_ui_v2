@@ -1,0 +1,33 @@
+.custom-text-area {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #9fa3a7;
+  border-radius: 0.4rem;
+  background-color: white;
+  textarea {
+    width: 100%;
+    border: none;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
+    background-color: white;
+    &:focus {
+      outline: none;
+    }
+  }
+  &__disabled {
+    background-color: #f6f6f6;
+    textarea {
+      background-color: none;
+    }
+  }
+  &__warning {
+    border: 1px solid #d72c0d;
+    background-color: #fff4f4;
+    textarea {
+      background-color: #fff4f4;
+    }
+  }
+}
