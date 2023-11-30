@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 
-const baseURL = 'http://localhost:5001/media/'
+const baseURL = import.meta.env.VITE_API_URL + 'media/'
 
 const axiosBase = axios.create({
   baseURL: baseURL,

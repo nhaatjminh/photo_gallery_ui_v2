@@ -44,7 +44,7 @@ const Modal: React.FC<IModal> = ({ children, isShow, className, setIsShow, backg
         document.removeEventListener('click', handleClickOutside)
       }
     }
-  }, [ref, isShow])
+  }, [ref, isShow, setIsShow])
 
   return (
     <div

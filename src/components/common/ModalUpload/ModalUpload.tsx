@@ -91,7 +91,13 @@ const ModalUpload: React.FC<IModalUpload> = ({ isShow, setIsShow, onUploadSucces
   }
 
   return (
-    <Modal className='modal-upload' isShow={isShow} setIsShow={setIsShow}>
+    <Modal
+      className='modal-upload'
+      isShow={isShow}
+      setIsShow={(show: boolean) => {
+        if (setIsShow && !uploading) setIsShow(show)
+      }}
+    >
       <div className='modal-upload__body'>
         <div className='grid wide'>
           <div className='row'>
