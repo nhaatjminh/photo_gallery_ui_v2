@@ -15,4 +15,18 @@
 
 .home {
   margin-top: 70px;
+  .loader {
+    margin-top: 15px;
+    circle {
+      stroke-width: 5;
+    }
+    @media (max-width: 739px) {
+      svg {
+        width: 30px;
+      }
+      circle {
+        stroke-width: 6;
+      }
+    }
+  }
 }

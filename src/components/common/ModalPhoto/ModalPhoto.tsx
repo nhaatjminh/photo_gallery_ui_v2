@@ -71,7 +71,13 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
   }
 
   return (
-    <Modal className='modal-photo' isShow={isShow} setIsShow={setIsShow}>
+    <Modal
+      className='modal-photo'
+      isShow={isShow}
+      setIsShow={(show: boolean) => {
+        if (setIsShow && !updating) setIsShow(show)
+      }}
+    >
       <div className='modal-photo__body'>
         {mode == MODE.VIEW ? (
           <>

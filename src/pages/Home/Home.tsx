@@ -135,8 +135,8 @@ export default function Home() {
         <div ref={ref} className='home grid wide container'>
           <div className='row'>
             <ListPhoto />
-            {loading && <Loader />}
           </div>
+          {loading && <Loader />}
         </div>
       </div>
 
