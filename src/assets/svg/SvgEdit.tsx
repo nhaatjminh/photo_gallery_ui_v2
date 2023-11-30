@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 export const SvgEdit = () => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50' width='15px' height='15px' fill='white'>

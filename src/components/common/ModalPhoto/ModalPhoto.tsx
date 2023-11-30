@@ -31,7 +31,6 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
   name,
   description,
   image,
-  thumbnail,
   index,
   onClickPrev,
   onClickNext,

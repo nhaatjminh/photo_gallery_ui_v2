@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Photo, { IPhoto } from '~/components/Photo/Photo'
 import photosAPI from '~/services/api/PhotoApi'
 import './Home.scss'
