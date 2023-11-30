@@ -8,10 +8,13 @@ import { SvgNext } from '~/assets/svg/SvgNext'
 import Input from '../Input/Input'
 import TextArea from '../TextArea/TextArea'
 import Button from '../Button/Button'
+import photosAPI from '~/services/api/PhotoApi'
+import Loader from '../Loader/Loader'
 
 interface IModalPhoto extends IPhoto {
   onClickNext?: (index: number) => Promise<void> | undefined
   onClickPrev?: (index: number) => void | undefined
+  onUpdateSuccess?: (photo: IPhoto) => void
   isShow: boolean
   setIsShow: (show: boolean) => void
 }
@@ -31,11 +34,13 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
   thumbnail,
   index,
   onClickPrev,
-  onClickNext
+  onClickNext,
+  onUpdateSuccess
 }) => {
   const [mode, setMode] = useState<MODE>(MODE.VIEW)
   const [_name, set_Name] = useState('')
   const [_description, set_Description] = useState('')
+  const [updating, setUpdating] = useState(false)
 
   useLayoutEffect(() => {
     set_Name(name)
@@ -44,6 +49,27 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
   useLayoutEffect(() => {
     set_Description(description)
   }, [description])
+
+  const handleEditPhoto = async () => {
+    if (!_name) {
+      alert('Name is required')
+      return
+    }
+    setUpdating(true)
+    const data = await photosAPI.editPhoto({
+      _id: _id,
+      name: _name,
+      description: _description
+    })
+    setUpdating(false)
+    console.log(data)
+    if (!data || !data.result) {
+      alert('Something went wrong! Please try again later')
+      return
+    }
+    if (onUpdateSuccess && data.result) onUpdateSuccess({ ...data.result, index: index })
+    setMode(MODE.VIEW)
+  }
 
   return (
     <Modal className='modal-photo' isShow={isShow} setIsShow={setIsShow}>
@@ -110,10 +136,13 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
                   e.stopPropagation()
                   setMode(MODE.VIEW)
                 }}
+                disabled={updating}
               >
                 Cancel
               </Button>
-              <Button>Save</Button>
+              <Button disabled={updating} onClick={handleEditPhoto}>
+                {updating ? <Loader small /> : 'Save'}
+              </Button>
             </div>
           </div>
         )}

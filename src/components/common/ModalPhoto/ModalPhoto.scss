@@ -101,6 +101,7 @@
         color: #616161;
         font-size: 16px;
         margin: 8px 0;
+        white-space: pre;
       }
     }
 
@@ -126,6 +127,15 @@
           background-color: #535353;
         }
       }
+    }
+  }
+  .loader {
+    svg {
+      width: 16px !important;
+    }
+    circle {
+      stroke: #ffffff !important;
+      stroke-width: 7 !important;
     }
   }
 }

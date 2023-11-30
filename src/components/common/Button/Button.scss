@@ -8,4 +8,8 @@
   border: none;
   color: white;
   background-color: #007F5F;
+  &:disabled {
+    opacity: 0.5;
+    cursor: unset;
+  }
 }

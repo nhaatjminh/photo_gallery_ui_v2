@@ -1,0 +1,18 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  justify-content: space-between;
+  z-index: 2;
+  h2 {
+    margin: 0;
+  }
+}
+
+.home {
+  margin-top: 70px;
+}

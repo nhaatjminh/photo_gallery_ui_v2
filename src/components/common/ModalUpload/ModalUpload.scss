@@ -1,0 +1,118 @@
+.modal-upload {
+  &__body {
+    display: block;
+    max-width: 1200px;
+    width: calc(100vw - 60px);
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: content-box;
+    padding: 20px;
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+      position: fixed;
+      right: -10px;
+      top: 0px;
+      bottom: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #aaaaaa;
+      border-radius: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #eeeeee;
+    }
+    @media (min-width: 1024px) and (max-width: 1239px) {
+      width: 984px;
+    }
+    @media (min-width: 740px) and (max-width: 1023px) {
+      width: 644px;
+    }
+    @media (max-width: 739px) {
+      height: calc(100vh - 62px);
+    }
+    .space {
+      height: 25px;
+    }
+    .group-btn {
+      padding: 10px;
+      width: calc(100% - 60px);
+      position: absolute;
+      bottom: 0;
+      background: rgba(214, 214, 219);
+      .upload-btn {
+        display: block;
+        margin: 0 auto;
+      }
+      .loader {
+        svg {
+          width: 16px !important;
+        }
+        circle {
+          stroke: #ffffff !important;
+          stroke-width: 7 !important;
+        }
+      }
+    }
+  }
+}
+
+.upload-card {
+  position: relative;
+  height: unset;
+  .input-img {
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: rgb(75, 74, 74);
+    margin-top: 10px;
+    // position: relative;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+    // z-index: 15;
+    width: 100%;
+    height: calc(100% - 10px);
+    position: relative;
+    @media (min-width: 740px) {
+      margin-top: 16px;
+      height: calc(100% - 16px);
+    }
+    @media (min-width: 1113px) {
+      margin-top: 24px;
+      height: calc(100% - 24px);
+    }
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: transparent;
+      border-radius: 10px;
+      opacity: 0;
+      z-index: 12;
+      cursor: pointer;
+    }
+    &-icon {
+      position: absolute;
+      top: calc(50% - 20px);
+      left: calc(50% - 20px);
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 29px;
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

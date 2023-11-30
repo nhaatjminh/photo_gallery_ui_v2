@@ -8,7 +8,7 @@ interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<IInput> = ({ warning, ...props }) => {
   return (
     <div
-      className={`custom-input } ${warning ? 'custom-input__warning' : ''}`}
+      className={`custom-input ${props.className ? props.className : ''} ${warning ? 'custom-input__warning' : ''}`}
       style={{ width: `${props.width}`, height: `${props.height}` }}
     >
       <input
