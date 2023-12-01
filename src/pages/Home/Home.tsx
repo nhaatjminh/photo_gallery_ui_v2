@@ -6,6 +6,7 @@ import ModalPhoto from '~/components/common/ModalPhoto/ModalPhoto'
 import Loader from '~/components/common/Loader/Loader'
 import ModalUpload from '~/components/common/ModalUpload/ModalUpload'
 import Button from '~/components/common/Button/Button'
+import { useToast } from '~/components/common/Toast/ToastContext'
 
 const limit = 12
 
@@ -22,6 +23,7 @@ export default function Home() {
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [loading, setLoading] = useState(false)
+  const toast = useToast()
 
   const fetchMoreData = async () => {
     setLoading(true)
@@ -112,12 +114,14 @@ export default function Home() {
     if (photo.index !== undefined) newPhotos[photo.index] = photo
     setPhotos(newPhotos)
     setCurrentPhoto(photo)
+    toast?.open('Update successfully!')
   }
 
   const handleOnUploadSuccess = (newPhotos: IPhoto[]) => {
     // setHasMore(true)
     const newListPhoto = [...newPhotos.reverse(), ...photos]
     setPhotos(newListPhoto)
+    toast?.open('Upload successfully!')
   }
 
   return (
