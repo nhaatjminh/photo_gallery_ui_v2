@@ -69,7 +69,7 @@ export default function Home() {
     return () => {
       if (observer) observer.disconnect()
     }
-  }, [photos, showPhoto, hasMore, showUploadModal])
+  }, [photos, showPhoto, showUploadModal])
 
   const ListPhoto = () => {
     return photos.map((photo, index) => (
@@ -114,8 +114,10 @@ export default function Home() {
     setCurrentPhoto(photo)
   }
 
-  const handleOnUploadSuccess = () => {
-    setHasMore(true)
+  const handleOnUploadSuccess = (newPhotos: IPhoto[]) => {
+    // setHasMore(true)
+    const newListPhoto = [...newPhotos.reverse(), ...photos]
+    setPhotos(newListPhoto)
   }
 
   return (

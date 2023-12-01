@@ -6,11 +6,12 @@ import PreviewPhoto from '~/components/PreviewPhoto/PreviewPhoto'
 import Button from '../Button/Button'
 import photosAPI from '~/services/api/PhotoApi'
 import Loader from '../Loader/Loader'
+import { IPhoto } from '~/components/Photo/Photo'
 
 interface IModalUpload {
   isShow: boolean
   setIsShow?: (show: boolean) => void
-  onUploadSuccess: () => void
+  onUploadSuccess: (newPhotos: IPhoto[]) => void
 }
 
 interface IFilePreview {
@@ -83,7 +84,7 @@ const ModalUpload: React.FC<IModalUpload> = ({ isShow, setIsShow, onUploadSucces
     const data = await photosAPI.uploadPhotos(formData)
     setUploading(false)
     if (data.result) {
-      onUploadSuccess()
+      onUploadSuccess(data.result)
       if (setIsShow) setIsShow(false)
     } else {
       alert('Some thing went wrong! Please try again later!')
