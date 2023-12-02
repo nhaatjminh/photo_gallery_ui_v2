@@ -119,7 +119,7 @@ export default function Home() {
 
   const handleOnUploadSuccess = (newPhotos: IPhoto[]) => {
     // setHasMore(true)
-    const newListPhoto = [...newPhotos.reverse(), ...photos]
+    const newListPhoto = [...newPhotos, ...photos]
     setPhotos(newListPhoto)
     toast?.open('Upload successfully!')
   }

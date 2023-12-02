@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import './ModalUpload.scss'
 import Modal from '../Modal/Modal'
 import CameraIcon from '~/assets/image/CameraIcon.png'
@@ -24,6 +24,8 @@ interface IFilePreview {
 const ModalUpload: React.FC<IModalUpload> = ({ isShow, setIsShow, onUploadSuccess }) => {
   const [previewPhotos, setPreviewPhotos] = useState<IFilePreview[]>([])
   const [uploading, setUploading] = useState(false)
+  const refHandleOnNameChange = useRef<(e: React.ChangeEvent<HTMLInputElement>, index: number) => void>()
+  const refFandleOnDescriptionChange = useRef<(e: React.ChangeEvent<HTMLTextAreaElement>, index: number) => void>()
 
   const handleOnSelectImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
@@ -53,23 +55,27 @@ const ModalUpload: React.FC<IModalUpload> = ({ isShow, setIsShow, onUploadSucces
     </div>
   )
 
-  const handleOnNameChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  useEffect(() => {
+    refHandleOnNameChange.current = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
       const newArr = [...previewPhotos]
       newArr[index].name = e.target.value
       setPreviewPhotos(newArr)
-    },
-    [previewPhotos]
-  )
+    }
 
-  const handleOnDescriptionChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
+    refFandleOnDescriptionChange.current = (e: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
       const newArr = [...previewPhotos]
       newArr[index].description = e.target.value
       setPreviewPhotos(newArr)
-    },
-    [previewPhotos]
-  )
+    }
+  }, [previewPhotos])
+
+  const handleOnNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    refHandleOnNameChange.current?.(e, index)
+  }, [])
+
+  const handleOnDescriptionChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
+    refFandleOnDescriptionChange.current?.(e, index)
+  }, [])
 
   const handleOnUpload = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
