@@ -156,6 +156,8 @@ export default function Home() {
           description={currentPhoto.description}
           thumbnail={currentPhoto.thumbnail}
           image={currentPhoto.image}
+          hasMore={hasMore}
+          maxIndex={photos.length - 1}
           onClickNext={handleOnClickNext}
           onClickPrev={handleOnClickPrev}
           onUpdateSuccess={handleOnUpdatePhotoSuccess}

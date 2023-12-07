@@ -17,6 +17,8 @@ interface IModalPhoto extends IPhoto {
   onUpdateSuccess?: (photo: IPhoto) => void
   isShow: boolean
   setIsShow: (show: boolean) => void
+  hasMore: boolean
+  maxIndex: number
 }
 
 enum MODE {
@@ -32,6 +34,8 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
   description,
   image,
   index,
+  hasMore,
+  maxIndex,
   onClickPrev,
   onClickNext,
   onUpdateSuccess
@@ -91,24 +95,29 @@ const ModalPhoto: React.FC<IModalPhoto> = ({
               >
                 <SvgEdit />
               </div>
-              <div
-                className='prev-btn'
-                onClick={(e) => {
-                  e.stopPropagation()
-                  if (index !== undefined && onClickPrev) onClickPrev(index)
-                }}
-              >
-                <SvgPrev />
-              </div>
-              <div
-                className='next-btn'
-                onClick={(e) => {
-                  e.stopPropagation()
-                  if (index !== undefined && onClickNext) onClickNext(index)
-                }}
-              >
-                <SvgNext />
-              </div>
+              {index !== 0 && (
+                <div
+                  className='prev-btn'
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    if (index !== undefined && onClickPrev) onClickPrev(index)
+                  }}
+                >
+                  <SvgPrev />
+                </div>
+              )}
+
+              {(index !== maxIndex || hasMore) && (
+                <div
+                  className='next-btn'
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    if (index !== undefined && onClickNext) onClickNext(index)
+                  }}
+                >
+                  <SvgNext />
+                </div>
+              )}
               <img src={image} />
             </div>
             <div className='modal-photo__body__content'>
